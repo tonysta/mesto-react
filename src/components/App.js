@@ -3,6 +3,7 @@ import '../index.css';
 import Header from "./Header";
 import Footer from "./Footer";
 import Main from "./Main";
+import PopupWithForm from "./PopupWithForm";
 
 
 function App() {
@@ -11,39 +12,33 @@ function App() {
         <div className="page">
           <Header />
           <Main/>
-          <div className="popup popup_section_profile">
-            <div className="popup__container">
-              <button type="button" className="popup__close-btn"></button>
-              <form name="profile" className="popup__form popup__form_type_profile" noValidate>
-                <h2 className="popup__title">Редактировать профиль</h2>
-                <label className="popup__field">
-                  <input
-                      type="text"
-                      name="name"
-                      placeholder="Иван Иванов"
-                      className="popup__input popup__input_type_name"
-                      required
-                      minLength="2"
-                      maxLength="40"
-                  />
-                  <span className="popup__input-error name-error"></span>
-                </label>
-                <label className="popup__field">
-                  <input
-                      type="text"
-                      name="profession"
-                      placeholder="Инженер"
-                      className="popup__input popup__input_type_profession"
-                      required
-                      minLength="2"
-                      maxLength="200"
-                  />
-                  <span className="popup__input-error profession-error"></span>
-                </label>
-                <button type="submit" className="popup__submit">Сохранить</button>
-              </form>
-            </div>
-          </div>
+          <PopupWithForm title = 'Редактировать профиль'
+                         name = 'profile'>
+            <label className="popup__field">
+              <input
+                  type="text"
+                  name="name"
+                  placeholder="Иван Иванов"
+                  className="popup__input popup__input_type_name"
+                  required
+                  minLength="2"
+                  maxLength="40"
+              />
+              <span className="popup__input-error name-error"></span>
+            </label>
+            <label className="popup__field">
+              <input
+                  type="text"
+                  name="profession"
+                  placeholder="Инженер"
+                  className="popup__input popup__input_type_profession"
+                  required
+                  minLength="2"
+                  maxLength="200"
+              />
+              <span className="popup__input-error profession-error"></span>
+            </label>
+          </PopupWithForm>
           <div className="popup popup_section_card">
             <div className="popup__container">
               <button type="button" className="popup__close-btn"></button>
@@ -78,7 +73,7 @@ function App() {
           <div className="popup popup_confirm_delete">
             <div className="popup__container">
               <button type="button" className="popup__close-btn"></button>
-              <form name="cardDelete" className="popup__form popup__form_type_card" noValidate>
+              <form name="card" className="popup__form popup__form_type_card" noValidate>
                 <h2 className="popup__title">Вы уверены?</h2>
                 <button type="submit" className="popup__submit">Да</button>
               </form>
@@ -87,7 +82,7 @@ function App() {
           <div className="popup popup_edit_avatar">
             <div className="popup__container">
               <button type="button" className="popup__close-btn"></button>
-              <form name="avatarNew" className="popup__form popup__form_type_avatar" noValidate>
+              <form name="avatar" className="popup__form popup__form_type_avatar" noValidate>
                 <h2 className="popup__title">Обновить аватар</h2>
                 <label className="popup__field">
                   <input

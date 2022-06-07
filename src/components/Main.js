@@ -1,5 +1,5 @@
 import React from 'react';
-import noAvatar from '../images/logo-white.svg';
+import noAvatar from '../images/giphy.gif';
 
 function Main() {
 
