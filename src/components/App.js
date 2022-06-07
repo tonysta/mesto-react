@@ -12,8 +12,7 @@ function App() {
         <div className="page">
           <Header />
           <Main/>
-          <PopupWithForm title = 'Редактировать профиль'
-                         name = 'profile'>
+          <PopupWithForm title = 'Редактировать профиль' name = 'profile'>
             <label className="popup__field">
               <input
                   type="text"
@@ -39,65 +38,48 @@ function App() {
               <span className="popup__input-error profession-error"></span>
             </label>
           </PopupWithForm>
-          <div className="popup popup_section_card">
-            <div className="popup__container">
-              <button type="button" className="popup__close-btn"></button>
-              <form name="card" className="popup__form popup__form_type_card" noValidate>
-                <h2 className="popup__title">Новое место</h2>
-                <label className="popup__field">
-                  <input
-                      type="text"
-                      placeholder="Название"
-                      name="title"
-                      className="popup__input popup__input_type_name"
-                      required
-                      minLength="2"
-                      maxLength="30"
-                  />
-                  <span className="popup__input-error title-error"></span>
-                </label>
-                <label className="popup__field">
-                  <input
-                      type="url"
-                      placeholder="Ссылка на картинку"
-                      name="link"
-                      className="popup__input popup__input_type_link"
-                      required
-                  />
-                  <span className="popup__input-error link-error"></span>
-                </label>
-                <button type="submit" className="popup__submit">Создать</button>
-              </form>
-            </div>
-          </div>
-          <div className="popup popup_confirm_delete">
-            <div className="popup__container">
-              <button type="button" className="popup__close-btn"></button>
-              <form name="card" className="popup__form popup__form_type_card" noValidate>
-                <h2 className="popup__title">Вы уверены?</h2>
-                <button type="submit" className="popup__submit">Да</button>
-              </form>
-            </div>
-          </div>
-          <div className="popup popup_edit_avatar">
-            <div className="popup__container">
-              <button type="button" className="popup__close-btn"></button>
-              <form name="avatar" className="popup__form popup__form_type_avatar" noValidate>
-                <h2 className="popup__title">Обновить аватар</h2>
-                <label className="popup__field">
-                  <input
-                      type="url"
-                      placeholder="Ссылка на картинку"
-                      name="link"
-                      className="popup__input popup__input_type_link"
-                      required
-                  />
-                  <span className="popup__input-error link-error"></span>
-                </label>
-                <button type="submit" className="popup__submit">Сохранить</button>
-              </form>
-            </div>
-          </div>
+
+          <PopupWithForm title = 'Новое место' name = 'card'>
+            <label className="popup__field">
+              <input
+                  type="text"
+                  placeholder="Название"
+                  name="title"
+                  className="popup__input popup__input_type_name"
+                  required
+                  minLength="2"
+                  maxLength="30"
+              />
+              <span className="popup__input-error title-error"></span>
+            </label>
+            <label className="popup__field">
+              <input
+                  type="url"
+                  placeholder="Ссылка на картинку"
+                  name="link"
+                  className="popup__input popup__input_type_link"
+                  required
+              />
+              <span className="popup__input-error link-error"></span>
+            </label>
+          </PopupWithForm>
+
+          <PopupWithForm title='Вы уверены?' name='delete'>
+          </PopupWithForm>
+
+          <PopupWithForm title='Обновить аватар' name='avatar'>
+            <label className="popup__field">
+              <input
+                  type="url"
+                  placeholder="Ссылка на картинку"
+                  name="link"
+                  className="popup__input popup__input_type_link"
+                  required
+              />
+              <span className="popup__input-error link-error"></span>
+            </label>
+          </PopupWithForm>
+
           <div className="popup viewer">
             <div className="viewer__container">
               <button
@@ -110,6 +92,7 @@ function App() {
           </div>
           <Footer />
         </div>
+
         <template className="card__template">
           <div className="card">
             <button type="button" className="card__trash-btn"></button>
@@ -123,6 +106,7 @@ function App() {
             </div>
           </div>
         </template>
+
       </div>
   );
 }

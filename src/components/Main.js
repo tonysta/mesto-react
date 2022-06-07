@@ -4,7 +4,7 @@ import noAvatar from '../images/giphy.gif';
 function Main() {
 
     function handleEditAvatarClick() {
-        const popup = document.querySelector('.popup_edit_avatar');
+        const popup = document.querySelector('.popup_section_avatar');
         popup.classList.add('popup_type_active');
     }
     function handleEditProfileClick() {
