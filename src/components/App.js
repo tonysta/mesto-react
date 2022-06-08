@@ -7,12 +7,28 @@ import PopupWithForm from "./PopupWithForm";
 
 
 function App() {
+
+  const [isEditAvatarOpen, setEditAvatarOpen] = React.useState(false);
+  const [isEditProfileOpen, setEditProfileOpen] = React.useState(false);
+  const [isAddPlaceOpen, setAddPlaceOpen] = React.useState(false);
+
+  function handleEditAvatarClick() {
+    setEditAvatarOpen(true);
+  }
+  function handleEditProfileClick() {
+    setEditProfileOpen(true);
+  }
+  function handleAddPlaceClick() {
+    setAddPlaceOpen(true);
+  }
+
   return (
       <div className="background">
         <div className="page">
           <Header />
-          <Main/>
-          <PopupWithForm title = 'Редактировать профиль' name = 'profile'>
+          <Main onEditProfile = {handleEditProfileClick} onAddPlace = {handleAddPlaceClick} onEditAvatar = {handleEditAvatarClick}/>
+
+          <PopupWithForm title = 'Редактировать профиль' name = 'profile' >
             <label className="popup__field">
               <input
                   type="text"
@@ -67,7 +83,7 @@ function App() {
           <PopupWithForm title='Вы уверены?' name='delete'>
           </PopupWithForm>
 
-          <PopupWithForm title='Обновить аватар' name='avatar'>
+          <PopupWithForm title='Обновить аватар' name='avatar' isOpen = {isEditAvatarOpen}>
             <label className="popup__field">
               <input
                   type="url"
@@ -80,16 +96,6 @@ function App() {
             </label>
           </PopupWithForm>
 
-          <div className="popup viewer">
-            <div className="viewer__container">
-              <button
-                  type="button"
-                  className="viewer__close-btn popup__close-btn"
-              ></button>
-              <img src="src/components/App#" alt="" className="viewer__img"/>
-              <h2 className="viewer__title"></h2>
-            </div>
-          </div>
           <Footer />
         </div>
 
