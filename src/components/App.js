@@ -9,9 +9,9 @@ import ImagePopup from "./ImagePopup";
 
 function App() {
 
-  const [isEditAvatarOpen, setEditAvatarOpen] = React.useState(false);
-  const [isEditProfileOpen, setEditProfileOpen] = React.useState(false);
-  const [isAddPlaceOpen, setAddPlaceOpen] = React.useState(false);
+  const [isEditAvatarOpen, setIsEditAvatarOpen] = React.useState(false);
+  const [isEditProfileOpen, setIsEditProfileOpen] = React.useState(false);
+  const [isAddPlaceOpen, setIsAddPlaceOpen] = React.useState(false);
 
   const [selectedCard, setSelectedCard] = useState(null);
 
@@ -20,19 +20,19 @@ function App() {
   }
 
   function handleEditAvatarClick() {
-    setEditAvatarOpen(true);
+    setIsEditAvatarOpen(true);
   }
   function handleEditProfileClick() {
-    setEditProfileOpen(true);
+    setIsEditProfileOpen(true);
   }
   function handleAddPlaceClick() {
-    setAddPlaceOpen(true);
+    setIsAddPlaceOpen(true);
   }
 
   function closeAllPopups() {
-    setEditAvatarOpen(false);
-    setEditProfileOpen(false);
-    setAddPlaceOpen(false);
+    setIsEditAvatarOpen(false);
+    setIsEditProfileOpen(false);
+    setIsAddPlaceOpen(false);
     setSelectedCard(null);
   }
 
@@ -110,7 +110,7 @@ function App() {
             </label>
           </PopupWithForm>
 
-          {selectedCard && <ImagePopup card={selectedCard} onClose={closeAllPopups}/>}
+          <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
           <Footer />
         </div>
