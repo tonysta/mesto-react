@@ -104,21 +104,6 @@ function App() {
 
           <Footer />
         </div>
-
-        <template className="card__template">
-          <div className="card">
-            <button type="button" className="card__trash-btn"></button>
-            <img src="imagesombai.jpg" alt="Домбай" className="card__img"/>
-            <div className="card__heading">
-              <h2 className="card__title">Домбай</h2>
-              <div className="card__like-container">
-                <button type="button" className="card__like-btn"></button>
-                <span className="card__like-counter"></span>
-              </div>
-            </div>
-          </div>
-        </template>
-
       </div>
   );
 }

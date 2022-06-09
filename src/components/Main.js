@@ -6,6 +6,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
     const [userName, setUserName] = useState();
     const [userDescription, setUserDescription] = useState();
     const [userAvatar, setUserAvatar] = useState();
+    const [cards, setCards] = useState([]);
 
     useEffect(function() {
         api.getProfileInfo().then((userInfo) => {
@@ -13,7 +14,13 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
             setUserDescription(userInfo.about);
             setUserAvatar(userInfo.avatar);
         })
-    } ,[])
+    },[]);
+
+    useEffect(function () {
+        api.getCards().then((cards) => {
+            setCards(cards);
+        })
+    }, []);
 
     return (
         <main className="main">
@@ -35,7 +42,21 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
                 </div>
                 <button onClick={onAddPlace} type="button" className="profile__add-btn"></button>
             </section>
-            <section className="cards-container"></section>
+            <section className="cards-container">
+                {cards.map((card, i) => (
+                    <div className="card" key={i} >
+                        <button type="button" className="card__trash-btn"></button>
+                        <img src={card.link} alt={card.name} className="card__img"/>
+                        <div className="card__heading">
+                            <h2 className="card__title">{card.name}</h2>
+                            <div className="card__like-container">
+                                <button type="button" className="card__like-btn"></button>
+                                <span className="card__like-counter">{card.likes.length}</span>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </section>
         </main>
     )
 }
