@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {api} from '../utils/api';
+import Card from './Card';
 
 function Main({onEditProfile, onAddPlace, onEditAvatar}) {
 
@@ -43,18 +44,8 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
                 <button onClick={onAddPlace} type="button" className="profile__add-btn"></button>
             </section>
             <section className="cards-container">
-                {cards.map((card, i) => (
-                    <div className="card" key={i} >
-                        <button type="button" className="card__trash-btn"></button>
-                        <img src={card.link} alt={card.name} className="card__img"/>
-                        <div className="card__heading">
-                            <h2 className="card__title">{card.name}</h2>
-                            <div className="card__like-container">
-                                <button type="button" className="card__like-btn"></button>
-                                <span className="card__like-counter">{card.likes.length}</span>
-                            </div>
-                        </div>
-                    </div>
+                {cards.map((card) => (
+                    <Card card = {card} key={card._id} />
                 ))}
             </section>
         </main>
