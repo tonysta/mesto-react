@@ -22,13 +22,19 @@ function App() {
     setAddPlaceOpen(true);
   }
 
+  function closeAllPopups() {
+    setEditAvatarOpen(false);
+    setEditProfileOpen(false);
+    setAddPlaceOpen(false);
+  }
+
   return (
       <div className="background">
         <div className="page">
           <Header />
           <Main onEditProfile = {handleEditProfileClick} onAddPlace = {handleAddPlaceClick} onEditAvatar = {handleEditAvatarClick}/>
 
-          <PopupWithForm title = 'Редактировать профиль' name = 'profile' >
+          <PopupWithForm title = 'Редактировать профиль' name = 'profile' isOpen={isEditProfileOpen} onOpen = {closeAllPopups}>
             <label className="popup__field">
               <input
                   type="text"
@@ -55,7 +61,7 @@ function App() {
             </label>
           </PopupWithForm>
 
-          <PopupWithForm title = 'Новое место' name = 'card'>
+          <PopupWithForm title = 'Новое место' name = 'card' isOpen={isAddPlaceOpen} onOpen = {closeAllPopups}>
             <label className="popup__field">
               <input
                   type="text"
@@ -83,7 +89,7 @@ function App() {
           <PopupWithForm title='Вы уверены?' name='delete'>
           </PopupWithForm>
 
-          <PopupWithForm title='Обновить аватар' name='avatar' isOpen = {isEditAvatarOpen}>
+          <PopupWithForm title='Обновить аватар' name='avatar' isOpen = {isEditAvatarOpen} onOpen = {closeAllPopups}>
             <label className="popup__field">
               <input
                   type="url"
