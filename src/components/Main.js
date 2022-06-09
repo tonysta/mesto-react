@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {api} from '../utils/api';
 import Card from './Card';
 
-function Main({onEditProfile, onAddPlace, onEditAvatar}) {
+function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
 
     const [userName, setUserName] = useState();
     const [userDescription, setUserDescription] = useState();
@@ -14,14 +14,11 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
             setUserName(userInfo.name);
             setUserDescription(userInfo.about);
             setUserAvatar(userInfo.avatar);
-        })
-    },[]);
-
-    useEffect(function () {
+        }).catch((err) =>{console.log(err)});
         api.getCards().then((cards) => {
             setCards(cards);
-        })
-    }, []);
+        }).catch((err) =>{console.log(err)});
+    },[]);
 
     return (
         <main className="main">
@@ -45,7 +42,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
             </section>
             <section className="cards-container">
                 {cards.map((card) => (
-                    <Card card = {card} key={card._id} />
+                    <Card card = {card} key={card._id} onCardClick={onCardClick} />
                 ))}
             </section>
         </main>

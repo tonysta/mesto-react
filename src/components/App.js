@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../index.css';
 import Header from "./Header";
 import Footer from "./Footer";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
 
 
 function App() {
@@ -11,6 +12,12 @@ function App() {
   const [isEditAvatarOpen, setEditAvatarOpen] = React.useState(false);
   const [isEditProfileOpen, setEditProfileOpen] = React.useState(false);
   const [isAddPlaceOpen, setAddPlaceOpen] = React.useState(false);
+
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  function handleCardClick(card) {
+    setSelectedCard(card);
+  }
 
   function handleEditAvatarClick() {
     setEditAvatarOpen(true);
@@ -26,13 +33,14 @@ function App() {
     setEditAvatarOpen(false);
     setEditProfileOpen(false);
     setAddPlaceOpen(false);
+    setSelectedCard(null);
   }
 
   return (
       <div className="background">
         <div className="page">
           <Header />
-          <Main onEditProfile = {handleEditProfileClick} onAddPlace = {handleAddPlaceClick} onEditAvatar = {handleEditAvatarClick}/>
+          <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
 
           <PopupWithForm title = 'Редактировать профиль' name = 'profile' isOpen={isEditProfileOpen} onOpen = {closeAllPopups}>
             <label className="popup__field">
@@ -101,6 +109,8 @@ function App() {
               <span className="popup__input-error link-error"></span>
             </label>
           </PopupWithForm>
+
+          {selectedCard && <ImagePopup card={selectedCard} onClose={closeAllPopups}/>}
 
           <Footer />
         </div>
