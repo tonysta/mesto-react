@@ -7,6 +7,7 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import {useEffect} from "react";
 import {api} from "../utils/api";
+import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
   }
 
   return (
+      <CurrentUserContext.Provider value={currentUser}>
       <div className="background">
         <div className="page">
           <Header />
@@ -123,6 +125,7 @@ function App() {
           <Footer />
         </div>
       </div>
+      </CurrentUserContext.Provider>
   );
 }
 
