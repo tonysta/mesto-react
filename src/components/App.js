@@ -5,15 +5,23 @@ import Footer from "./Footer";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import {useEffect} from "react";
+import {api} from "../utils/api";
 
 
 function App() {
-
+  const [currentUser, setCurrentUser] = useState({});
   const [isEditAvatarOpen, setIsEditAvatarOpen] = React.useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = React.useState(false);
   const [isAddPlaceOpen, setIsAddPlaceOpen] = React.useState(false);
 
   const [selectedCard, setSelectedCard] = useState(null);
+
+  useEffect(function() {
+    api.getProfileInfo().then((userInfo) => {
+      setCurrentUser(userInfo);
+    }).catch((err) =>{console.log(err)});
+  },[]);
 
   function handleCardClick(card) {
     setSelectedCard(card);
