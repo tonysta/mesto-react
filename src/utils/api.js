@@ -70,13 +70,20 @@ class Api {
             return this.handleError(res);
         })
     }
-    removeLike({cardId}) {
+    removeLike(cardId) {
         return fetch(`${this._url}cards/${cardId}/likes`, {
             method: 'DELETE',
             headers: this._headers
         }).then((res) => {
             return this.handleError(res);
         })
+    }
+    changeLikeCardStatus(cardId, isLike) {
+        if (isLike) {
+            return this.removeLike(cardId);
+        } else {
+            return this.addLike(cardId);
+        }
     }
     handleError(res) {
         if (res.ok) {
