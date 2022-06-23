@@ -62,7 +62,7 @@ class Api {
             return this.handleError(res);
         })
     }
-    addLike({cardId}) {
+    addLike(cardId) {
         return fetch(`${this._url}cards/${cardId}/likes`, {
             method: 'PUT',
             headers: this._headers

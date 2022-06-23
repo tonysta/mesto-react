@@ -15,6 +15,16 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
         }).catch((err) =>{console.log(err)});
     },[]);
 
+    function handleCardLike(card) {
+        // Снова проверяем, есть ли уже лайк на этой карточке
+        const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+        // Отправляем запрос в API и получаем обновлённые данные карточки
+        api.addLike(card._id, !isLiked).then((newCard) => {
+            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        });
+    }
+
     return (
         <main className="main">
             <section className="profile">
@@ -37,7 +47,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
             </section>
             <section className="cards-container">
                 {cards.map((card) => (
-                    <Card card = {card} key={card._id} onCardClick={onCardClick} />
+                    <Card card = {card} key={card._id} onCardClick={onCardClick} onCardLike={handleCardLike}/>
                 ))}
             </section>
         </main>
