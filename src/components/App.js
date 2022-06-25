@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import EditProfilePopup from "./EditProfilePopup";
 import {useEffect} from "react";
 import {api} from "../utils/api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
@@ -45,6 +46,13 @@ function App() {
     setSelectedCard(null);
   }
 
+  function handleUpdateUser(data) {
+    api.patchProfile(data).then((res) => {
+      setCurrentUser(res);
+    }).catch((err) => {console.log(err)});
+    closeAllPopups();
+  }
+
   return (
       <CurrentUserContext.Provider value={currentUser}>
         <div className="background">
@@ -52,34 +60,9 @@ function App() {
             <Header />
             <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
 
-            <PopupWithForm title = 'Редактировать профиль' name = 'profile' isOpen={isEditProfileOpen} onOpen={closeAllPopups}>
-              <label className="popup__field">
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Иван Иванов"
-                    className="popup__input popup__input_type_name"
-                    required
-                    minLength="2"
-                    maxLength="40"
-                />
-                <span className="popup__input-error name-error"></span>
-              </label>
-              <label className="popup__field">
-                <input
-                    type="text"
-                    name="profession"
-                    placeholder="Инженер"
-                    className="popup__input popup__input_type_profession"
-                    required
-                    minLength="2"
-                    maxLength="200"
-                />
-                <span className="popup__input-error profession-error"></span>
-              </label>
-            </PopupWithForm>
+            <EditProfilePopup isOpen={isEditProfileOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
 
-            <PopupWithForm title = 'Новое место' name = 'card' isOpen={isAddPlaceOpen} onOpen = {closeAllPopups}>
+            <PopupWithForm title='Новое место' name ='card' isOpen={isAddPlaceOpen} onOpen={closeAllPopups}>
               <label className="popup__field">
                 <input
                     type="text"
