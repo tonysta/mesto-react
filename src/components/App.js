@@ -86,6 +86,13 @@ function App() {
     })
   }
 
+  function handleAddPlaceSubmit(card) {
+    api.addCard(card).then((newCard) => {
+      setCards([newCard, ...cards]);
+    }).catch((err) => {console.log(err)});
+    closeAllPopups();
+  }
+
   return (
       <CurrentUserContext.Provider value={currentUser}>
         <div className="background">
@@ -103,7 +110,7 @@ function App() {
 
             <EditProfilePopup isOpen={isEditProfileOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
 
-            <AddPlacePopup isOpen={isAddPlaceOpen} onClose={closeAllPopups} />
+            <AddPlacePopup isOpen={isAddPlaceOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}/>
 
             <PopupWithForm title='Вы уверены?' name='delete'>
             </PopupWithForm>

@@ -1,9 +1,22 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup({isOpen, onClose}) {
+function AddPlacePopup({isOpen, onClose, onAddPlace}) {
+
+    const nameRef = React.createRef();
+    const linkRef = React.createRef();
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        onAddPlace({
+            name: nameRef.current.value,
+            link: linkRef.current.value
+        });
+    }
+
     return (
-        <PopupWithForm title='Новое место' name ='card' isOpen={isOpen} onOpen={onClose}>
+        <PopupWithForm title='Новое место' name ='card' isOpen={isOpen} onOpen={onClose} onSubmit={handleSubmit}>
             <label className="popup__field">
                 <input
                     type="text"
@@ -13,6 +26,7 @@ function AddPlacePopup({isOpen, onClose}) {
                     required
                     minLength="2"
                     maxLength="30"
+                    ref={nameRef}
                 />
                 <span className="popup__input-error title-error"></span>
             </label>
@@ -23,6 +37,7 @@ function AddPlacePopup({isOpen, onClose}) {
                     name="link"
                     className="popup__input popup__input_type_link"
                     required
+                    ref={linkRef}
                 />
                 <span className="popup__input-error link-error"></span>
             </label>
