@@ -9,6 +9,7 @@ import EditProfilePopup from "./EditProfilePopup";
 import {useEffect} from "react";
 import {api} from "../utils/api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 
 function App() {
@@ -53,6 +54,13 @@ function App() {
     closeAllPopups();
   }
 
+  function handleUpdateAvatar(data) {
+    api.editAvatar(data).then((res) => {
+      setCurrentUser(res);
+    }).catch((err) => {console.log(err)});
+    closeAllPopups();
+  }
+
   return (
       <CurrentUserContext.Provider value={currentUser}>
         <div className="background">
@@ -90,18 +98,7 @@ function App() {
             <PopupWithForm title='Вы уверены?' name='delete'>
             </PopupWithForm>
 
-            <PopupWithForm title='Обновить аватар' name='avatar' isOpen = {isEditAvatarOpen} onOpen = {closeAllPopups}>
-              <label className="popup__field">
-                <input
-                    type="url"
-                    placeholder="Ссылка на картинку"
-                    name="link"
-                    className="popup__input popup__input_type_link"
-                    required
-                />
-                <span className="popup__input-error link-error"></span>
-              </label>
-            </PopupWithForm>
+            <EditAvatarPopup isOpen={isEditAvatarOpen} onOpen={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
 
             <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
