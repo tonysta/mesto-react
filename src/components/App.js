@@ -10,6 +10,7 @@ import {useEffect} from "react";
 import {api} from "../utils/api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 
 function App() {
@@ -102,30 +103,7 @@ function App() {
 
             <EditProfilePopup isOpen={isEditProfileOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
 
-            <PopupWithForm title='Новое место' name ='card' isOpen={isAddPlaceOpen} onOpen={closeAllPopups}>
-              <label className="popup__field">
-                <input
-                    type="text"
-                    placeholder="Название"
-                    name="title"
-                    className="popup__input popup__input_type_name"
-                    required
-                    minLength="2"
-                    maxLength="30"
-                />
-                <span className="popup__input-error title-error"></span>
-              </label>
-              <label className="popup__field">
-                <input
-                    type="url"
-                    placeholder="Ссылка на картинку"
-                    name="link"
-                    className="popup__input popup__input_type_link"
-                    required
-                />
-                <span className="popup__input-error link-error"></span>
-              </label>
-            </PopupWithForm>
+            <AddPlacePopup isOpen={isAddPlaceOpen} onClose={closeAllPopups} />
 
             <PopupWithForm title='Вы уверены?' name='delete'>
             </PopupWithForm>
