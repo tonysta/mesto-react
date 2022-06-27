@@ -5,13 +5,13 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext";
 function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
 
     const currentUser = React.useContext(CurrentUserContext);
+    const [name, setName] = React.useState('');
+    const [description, setDescription] = React.useState('');
+
     React.useEffect(() => {
         setName(currentUser.name);
         setDescription(currentUser.about);
-    }, [currentUser]);
-
-    const [name, setName] = React.useState('');
-    const [description, setDescription] = React.useState('');
+    }, [currentUser, isOpen]);
 
     function handleNameChange(event) {
         setName(event.target.value);
@@ -21,10 +21,8 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
     }
 
     function handleSubmit(e) {
-        // Запрещаем браузеру переходить по адресу формы
         e.preventDefault();
 
-        // Передаём значения управляемых компонентов во внешний обработчик
         onUpdateUser({
             name,
             about: description,
@@ -42,7 +40,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
                     required
                     minLength="2"
                     maxLength="40"
-                    value={name}
+                    value={name || ''}
                     onChange={handleNameChange}
                 />
                 <span className="popup__input-error name-error"></span>
@@ -56,7 +54,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
                     required
                     minLength="2"
                     maxLength="200"
-                    value={description}
+                    value={description || ''}
                     onChange={handleDescriptionChange}
                 />
                 <span className="popup__input-error profession-error"></span>
